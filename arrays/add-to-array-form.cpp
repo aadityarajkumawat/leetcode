@@ -15,7 +15,6 @@ std::vector<int> addToArrayForm(std::vector<int>& A, int K) {
 
   while (n > -1) {
     K += A[n];
-    // std::cout << K << " ";
     res.push_back(K % 10);
     K /= 10;
     n--;
