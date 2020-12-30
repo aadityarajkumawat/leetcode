@@ -23,8 +23,32 @@ void traverseLinkedList(Node* head) {
 }
 
 Node* mergeTwoLists(Node* l1, Node* l2) {
-  
+  Node* two = l2;
+  Node* one = l1;
+  while (one != NULL || two != NULL) {
+    if (one->next == NULL) {
+      if (two->next == NULL) {
+        if (one->data > two->data) {
 
+        }
+        else if (one->data <= two->data) {
+          l1->next = l2;
+          one = NULL;
+          two = NULL;
+        }
+      }
+    }
+    else if (one->data <= two->data && one->next->data >= two->data) {
+      one = one->next;
+      two = two->next;
+
+      l2->next = l1->next;
+      l1->next = l2;
+
+      l1 = one;
+      l2 = two;
+    }
+  }
   return l1;
 }
 
