@@ -26,7 +26,7 @@ Node* mergeTwoLists(Node* l1, Node* l2) {
   Node* two = l2;
   Node* one = l1;
   while (one != NULL || two != NULL) {
-    if (one->next == NULL) {
+    if (one->next == NULL || two->next == NULL) {
       if (two->next == NULL) {
         if (one->data > two->data) {
 
@@ -36,6 +36,9 @@ Node* mergeTwoLists(Node* l1, Node* l2) {
           one = NULL;
           two = NULL;
         }
+      }
+      else if (one->next == NULL) {
+        
       }
     }
     else if (one->data <= two->data && one->next->data >= two->data) {
