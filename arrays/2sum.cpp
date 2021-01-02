@@ -21,10 +21,32 @@ std::vector<int> twoSum(std::vector<int>& nums, int target) {
   return required_nums;
 }
 
+std::vector<int> twoSumOnSteroids(std::vector<int>& nums, int target) {
+  int low = 0;
+  int high = nums.size() - 1;
+  std::vector<int> required_nums = {};
+
+  while(low < high) {
+    if(nums[low] + nums[high] == target) {
+      required_nums.push_back(low);
+      required_nums.push_back(high);
+      break;
+    }
+    else if(nums[low] + nums[high] > target) {
+      high--;
+    }
+    else {
+      low++;
+    }
+  }
+
+  return required_nums;
+}
+
 int main() {
-  std::vector<int> nums = { 3, 5, 2, 1 };
+  std::vector<int> nums = { 1, 2, 3, 5 };
   int target = 7;
-  std::vector<int> found_indices = twoSum(nums, target);
+  std::vector<int> found_indices = twoSumOnSteroids(nums, target);
 
   for (int& x : found_indices) {
     std::cout << x << " ";
