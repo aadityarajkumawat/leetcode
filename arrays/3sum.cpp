@@ -4,25 +4,39 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-// -1, -1, 0, 1, 2, 4
+
 std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
   if (nums.size() < 3) {
     return {};
   }
   std::sort(nums.begin(), nums.end());
   std::vector<std::vector<int>> res = {};
+  int prevLow = -100, prevHigh = -100, prevI = -100;
   for (int i = 0;i < nums.size() - 2;i++) {
     std::vector<int> aTriplet = {};
-    int target = nums[i];
     int low = i + 1;
     int high = nums.size() - 1;
     int sum = 0 - nums[i];
+
     while (low < high) {
-      if (nums[low] + nums[high] == sum) {
+      if (i == 1) {
+        std::cout << "low->" << prevLow << "->" << nums[low] << std::endl;
+        std::cout << "high->" << prevHigh << "->" << nums[high] << std::endl;
+      }
+      if (nums[low] + nums[high] == sum && ((prevLow != nums[low] && prevHigh != nums[high]) ||
+        (prevI != nums[i] && prevLow != nums[low]) || (prevI != nums[i] && prevHigh != nums[high]))) {
+        if (aTriplet.size() == 3) {
+          res.push_back(aTriplet);
+          aTriplet.clear();
+        }
+
         aTriplet.push_back(nums[i]);
         aTriplet.push_back(nums[low]);
         aTriplet.push_back(nums[high]);
-        break;
+
+        prevLow = nums[low];
+        prevHigh = nums[high];
+        prevI = nums[i];
       }
       else if (nums[low] + nums[high] > sum) {
         high--;
@@ -34,12 +48,13 @@ std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
     if (aTriplet.size() > 0) {
       res.push_back(aTriplet);
     }
+
   }
   return res;
 }
 
 int main() {
-  std::vector<int> nums = { 0,0,0,0 };
+  std::vector<int> nums = { -2, -1, 0, 1, 2, 3 };
   std::vector<std::vector<int>> f = threeSum(nums);
 
   for (std::vector<int>& aTrip : f) {
