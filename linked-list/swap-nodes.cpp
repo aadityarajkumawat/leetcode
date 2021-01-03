@@ -23,16 +23,6 @@ void printList(ListNode* head) {
   std::cout << std::endl;
 }
 
-int getLengthOfList(ListNode* head) {
-  int length = 0;
-  while (head != NULL) {
-    head = head->next;
-    length++;
-  }
-
-  return length;
-}
-
 ListNode* push(ListNode* head, int val) {
   ListNode* newNode = new ListNode();
   ListNode* ptr = head;
@@ -47,41 +37,31 @@ ListNode* push(ListNode* head, int val) {
   return head;
 }
 
-ListNode* removeNthFromEnd(ListNode* head, int n) {
+ListNode* swapNodes(ListNode* head) {
   ListNode* ptr = head;
-  ListNode* qtr = NULL;
-  int index = 1;
-  int length = getLengthOfList(head);
-  if (length == 1 && n == 1) {
-    return NULL;
-  }
-  if(length - n == 0) {
-    head = head->next;
-    return head;
-  }
-  while (index != length - n) {
+  while (ptr->next != NULL) {
+    int temp = ptr->val;
+    ptr->val = ptr->next->val;
+    ptr->next->val = temp;
     ptr = ptr->next;
-    index++;
+    if (ptr->next != NULL) {
+      ptr = ptr->next;
+    }
   }
 
-  qtr = ptr->next;
-  ptr->next = qtr->next;
-
-  free(qtr);
   return head;
 }
-
+// 1->2->3->4->NULL
 int main() {
   ListNode* head = new ListNode();
   head->val = 1;
   head->next = NULL;
   head = push(head, 2);
-  // head = push(head, 3);
+  head = push(head, 3);
   // head = push(head, 4);
-  // head = push(head, 5);
 
+  head = swapNodes(head);
   printList(head);
-  head = removeNthFromEnd(head, 2);
-  printList(head);
+
   return 0;
 }
