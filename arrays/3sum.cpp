@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+// I will have to use HashMap to pass all test cases, so will return here later
 std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
   if (nums.size() < 3) {
     return {};
@@ -54,7 +54,7 @@ std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
 }
 
 int main() {
-  std::vector<int> nums = { -2, -1, 0, 1, 2, 3 };
+  std::vector<int> nums = { -4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6 };
   std::vector<std::vector<int>> f = threeSum(nums);
 
   for (std::vector<int>& aTrip : f) {
