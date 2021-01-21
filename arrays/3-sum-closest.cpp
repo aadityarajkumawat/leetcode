@@ -24,12 +24,19 @@ int threeSumClosest(std::vector<int>& nums, int target) {
         diff = target - sum;
       }
 
+      if (sum < target) {
+        low++;
+      }
+      else {
+        high--;
+      }
+
     }
 
     i++;
   }
 
-  return 2;
+  return (target - diff);
 }
 
 int main() {
