@@ -30,9 +30,7 @@ int threeSumClosest(std::vector<int>& nums, int target) {
       else {
         high--;
       }
-
     }
-
     i++;
   }
 
