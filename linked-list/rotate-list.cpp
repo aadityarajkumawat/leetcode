@@ -61,7 +61,16 @@ ListNode* rotateOne(ListNode* head) {
 }
 
 ListNode* rotateRight(ListNode* head, int k) {
-  for (int i = 0;i < k;i++) {
+  int len = 0;
+  ListNode* ptr = head;
+  while (ptr != NULL) {
+    len++;
+    ptr = ptr->next;
+  }
+  if (len == 0) {
+    return head;
+  }
+  for (int i = 0;i < (k % len);i++) {
     head = rotateOne(head);
   }
 
@@ -72,16 +81,16 @@ int main() {
   ListNode* head = new ListNode();
 
   head->next = NULL;
-  head->val = 0;
+  head->val = 1;
 
-  head = push(head, 1);
   head = push(head, 2);
+  head = push(head, 3);
   // head = push(head, 4);
   // head = push(head, 5);
 
   printList(head);
 
-  head = rotateRight(head, 4);
+  head = rotateRight(head, 2000000000);
 
   printList(head);
 
