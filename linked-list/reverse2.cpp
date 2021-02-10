@@ -37,52 +37,63 @@ ListNode* push(ListNode* head, int val) {
   return head;
 }
 
-ListNode* partition(ListNode* head, int x) {
-  ListNode* before_head = new ListNode();
-  before_head->val = 0;
-  before_head->next = NULL;
-  ListNode* before = before_head;
-  ListNode* after_head = new ListNode();
-  after_head->val = 0;
-  after_head->next = NULL;
-  ListNode* after = after_head;
-
-  while (head != NULL) {
-    if (head->val < x) {
-      before->next = head;
-      before = before->next;
+int getVal(ListNode* head, int i) {
+  int j = 1;
+  int n = 0;
+  while (j <= i) {
+    if (j == i) {
+      n = head->val;
     }
-    else {
-      after->next = head;
-      after = after->next;
-    }
+    j++;
     head = head->next;
   }
 
-  after->next = NULL;
-  before->next = after_head->next;
+  return n;
+}
 
-  return before_head->next;
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+  ListNode* p = head;
+  int len = 0;
+  while (p != NULL) {
+    len++;
+    p = p->next;
+  }
+
+  ListNode* m_node = head;
+  ListNode* n_node = head;
+  ListNode* ptr = head;
+
+  int i = 1;
+  while (i <= len) {
+    if (i == m) {
+      m_node = ptr;
+    }
+    else if (i == n) {
+      n_node = ptr;
+    }
+    ptr = ptr->next;
+    i++;
+  }
+
+  // int low = 
+
+  return head;
 }
 
 int main() {
   ListNode* head = new ListNode();
-  int x = 3;
-
   head->val = 1;
   head->next = NULL;
-
-  head = push(head, 4);
+  head = push(head, 2);
   head = push(head, 3);
-  head = push(head, 2);
+  head = push(head, 4);
   head = push(head, 5);
-  head = push(head, 2);
 
-  printList(partition(head, x));
+  printList(head);
+  // head = reverseBetween(head, 2, 4);
+
+  int s = getVal(head, 3);
+  std::cout << s << std::endl;
 
   return 0;
 }
-
-
-
-
